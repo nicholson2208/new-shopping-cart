@@ -1,5 +1,8 @@
 [
-    {"name": "T-shirt", "size":"M", "price" : 20}, 
-    {"name": "Pants", "size":"L", "price" : 10},
-    {"name": "Coat", "size":"S", "price" : 80}
-]
+    {"category": "Clothing", "price": "$49.99", "name": "Shirt", "size" : "M", "image":"shirt.jpg"},
+    {"category": "Clothing", "price": "$9.99", "name": "Coat", "size" : "M", "image":"coat.jpg"},
+    {"category": "Clothing", "price": "$29.99", "name": "Pants", "size" : "M", "image":"coat.jpg"},
+    {"category": "Accessories", "price": "$99.99", "name": "Sunglasses", "size" : "M", "image":"coat.jpg"},
+    {"category": "Accessories", "price": "$399.99", "name": "Necklace", "size" : "M", "image":"coat.jpg"},
+    {"category": "Accessories", "price": "$199.99", "name": "Necktie", "size" : "M", "image":"coat.jpg"}
+  ]
