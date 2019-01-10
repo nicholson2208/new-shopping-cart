@@ -18,59 +18,71 @@ class ProductCategoryRow extends React.Component {
 
 class ProductRow extends React.Component {
   render() {
-    const product = this.props.product;
-    const name = product.stocked ?
-      product.name :
-      <span style={{color: 'red'}}>
-        {product.name}
-      </span>;
-    const size = product.size;
-    const image_path = require(`./static/data/products/${product.image}`);
+    const rows = [];    
+    this.props.products.forEach((product) => {
+      rows.push(
+        <Product
+          product={product}
+          key={product.name} />
+      );
+    });
 
     return (
-      <tr>
-        <td><img height="42" width="42" src={image_path}></img><p>{name}</p></td>
-        <td>{product.price}</td>
-        <td>{product.size}</td>
-        <td><div className="add_button">Add to Cart</div> </td>
-      </tr>
+
+      <div id="holder">{rows}</div>
     );
+  }
+}
+
+class Product extends React.Component {
+  render() {
+    const product = this.props.product;
+
+    const image_path = require(`./static/data/products/${product.image}`);
+    const size = product.size;
+
+    return (
+      <div class="product">
+
+      <img height="80" width="80" src={image_path}></img>
+      <p>{product.name}</p>
+      <p>{product.price}</p>
+      <button>Add to Cart</button>
+      </div>
+
+
+    );
+
   }
 }
 
 class ProductTable extends React.Component {
   render() {
-    const rows = [];
-    let lastCategory = null;
-    
+    const rows = [];    
     this.props.products.forEach((product) => {
-      if (product.category !== lastCategory) {
-        rows.push(
-          <ProductCategoryRow
-            category={product.category}
-            key={product.category} />
-        );
-      }
       rows.push(
-        <ProductRow
+        <Product
           product={product}
           key={product.name} />
       );
-      lastCategory = product.category;
     });
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Size</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+
+      <div id="holder">{rows}</div>
+
+
+      // <table>
+      //   <thead>
+      //     <tr>
+      //       <th>Name</th>
+      //       <th>Price</th>
+      //       <th>Size</th>
+      //       <th> </th>
+      //     </tr>
+      //   </thead>
+      //   <tbody>{rows}</tbody>
+      // </table>
     );
   }
 }
@@ -93,18 +105,5 @@ class FilterableProductTable extends React.Component {
     );
   }
 }
-
-
-// const PRODUCTS = [
-//   {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-//   {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-//   {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-//   {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-//   {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-//   {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-// ];
- 
-
-
 
 export default FilterableProductTable;
