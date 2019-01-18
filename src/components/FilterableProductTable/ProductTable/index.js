@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
 import Product from './Product';
 import './index.scss';
@@ -12,6 +11,7 @@ export default class ProductTable extends React.Component {
         rows.push(
           <Product
             product={product}
+            handleAddToCart = {(p) => this.props.handleAddToCart(p)}
             key={product.name} />
         );
       });
