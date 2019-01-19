@@ -7,7 +7,7 @@ export default class BaseTemplate extends Component {
     constructor(){
       super();
       this.state = {
-        "inShoppingCart" : [{"name":"cat"}],
+        "inShoppingCart" : [],
        "isShoppingCartActive": false
         };
       this.handleAddToCart = this.handleAddToCart.bind(this);
