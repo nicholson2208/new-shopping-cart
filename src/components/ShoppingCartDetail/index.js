@@ -19,7 +19,7 @@ export default class ShoppingCartDetail extends React.Component {
                         <Button
                             bsStyle="danger"
                             bsSize="xsmall"
-                            onClick={(item)=>console.log("removing this thing!!!!")}
+                            onClick={()=>this.props.handleRemoveFromCart(item)}
                         >
                             <Glyphicon 
                                 glyph="remove"

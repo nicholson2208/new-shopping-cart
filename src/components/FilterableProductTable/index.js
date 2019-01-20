@@ -15,6 +15,8 @@ export default class FilterableProductTable extends React.Component {
           return(
             <ShoppingCartDetail 
               inShoppingCart = {inCart}
+              isShoppingCartActive = {this.props.isShoppingCartActive}
+              handleRemoveFromCart = {(p) => this.props.handleRemoveFromCart(p)}
             />
           );
         

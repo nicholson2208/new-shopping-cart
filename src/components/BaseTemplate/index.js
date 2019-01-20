@@ -12,9 +12,36 @@ export default class BaseTemplate extends Component {
         };
       this.handleAddToCart = this.handleAddToCart.bind(this);
       this.handleToggleCart = this.handleToggleCart.bind(this);
+      this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
+
     }
 
-    handleAddToCart(product){
+    makeId() {
+      let text = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (let i = 0; i < 8; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    
+      return text;
+    }
+
+    handleRemoveFromCart(product){
+      console.log("oh boy, I removed something");
+      console.log(product.id);
+      let newProductList = this.state.inShoppingCart;
+
+      newProductList.forEach((x) =>{
+        console.log(x.id)
+      });
+      
+      newProductList = newProductList.filter((item)=> {return(item.id !== product.id)});
+
+      this.setState({"inShoppingCart": newProductList});
+    }
+
+    handleAddToCart(product){      
+      product["id"] = this.makeId();
       console.log(product);
 
       let newProductList = this.state.inShoppingCart;
@@ -38,7 +65,8 @@ export default class BaseTemplate extends Component {
             products={this.props.products} 
             isShoppingCartActive = {this.state.isShoppingCartActive}
             inShoppingCart = {this.state.inShoppingCart}
-            handleAddToCart={(p) => this.handleAddToCart(p)}
+            handleAddToCart = {(p) => this.handleAddToCart(p)}
+            handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
             handleToggleCart = {() => this.handleToggleCart()}
           />
       );
