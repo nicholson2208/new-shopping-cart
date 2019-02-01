@@ -1,20 +1,73 @@
 import React, { Component } from 'react';
+import Media from 'react-media';
 
 import FilterableProductTable from '../FilterableProductTable';
+import Calendar from '../Calendar';
 
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebaseConfig from '../.././firebase-config.json'
+
+// Get the Firebase config from the auto generated file.
+//const firebaseConfig = require('../.././firebase-config.json').result;
+
+
+console.log(firebaseConfig)
+// Instantiate a Firebase app.
+//const firebaseApp = 
+
+firebase.initializeApp(firebaseConfig);
 
 export default class BaseTemplate extends Component {
     constructor(){
+      
       super();
+
+      this.uiConfig = {
+        signInFlow: 'popup',
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        callbacks: {
+          signInSuccessWithAuthResult: () => false,
+        },};
+
       this.state = {
         "inShoppingCart" : [],
-       "isShoppingCartActive": false
+       "isShoppingCartActive": false,
+       user: null,
         };
       this.handleAddToCart = this.handleAddToCart.bind(this);
       this.handleToggleCart = this.handleToggleCart.bind(this);
       this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
 
     }
+
+
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({
+            user: user,
+          });
+        }
+      });
+    }
+
+    componentWillUnmount() {
+      this.unregisterAuthObserver();
+    }
+
+    handleLogOut() {
+      firebase.auth().signOut()
+        .then(() => {
+          this.setState({
+            user: null
+          });
+      });
+    }
+  
 
     makeId() {
       let text = "";
@@ -26,7 +79,8 @@ export default class BaseTemplate extends Component {
       return text;
     }
 
-    handleRemoveFromCart(product){
+    handleRemoveFromCart(product){ // I think the fix here is to make it like a quantity
+      // and have different rules for multiple of the same item
       console.log("oh boy, I removed something");
       console.log(product.id);
       let newProductList = this.state.inShoppingCart;
@@ -61,14 +115,38 @@ export default class BaseTemplate extends Component {
 
     render() {
       return (
-          <FilterableProductTable 
-            products={this.props.products} 
-            isShoppingCartActive = {this.state.isShoppingCartActive}
-            inShoppingCart = {this.state.inShoppingCart}
-            handleAddToCart = {(p) => this.handleAddToCart(p)}
-            handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
-            handleToggleCart = {() => this.handleToggleCart()}
-          />
+        <div>
+        { this.state.user === null ? 
+          <div>
+  
+          <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
+        </div>
+    : <div>
+        <button 
+          onClick={() => this.handleLogOut()}>
+          log out
+        </button>
+         <FilterableProductTable 
+          products={this.props.products} 
+          isShoppingCartActive = {this.state.isShoppingCartActive}
+          inShoppingCart = {this.state.inShoppingCart}
+          handleAddToCart = {(p) => this.handleAddToCart(p)}
+          handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
+          handleToggleCart = {() => this.handleToggleCart()}
+        />
+      </div>
+        }
+
+
+        </div>
+        
+        
+        
       );
     }
   }
+
+ 

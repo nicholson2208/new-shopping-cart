@@ -25,7 +25,7 @@ export default class ShoppingCartDetail extends React.Component {
                                 glyph="remove"
                             />
                         </Button>
-                    </div></p>);
+                    </div></p>); // maybe make a plus and minus button to control the quanity in the cart
         });
 
       return (
