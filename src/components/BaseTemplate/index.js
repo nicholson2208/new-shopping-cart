@@ -16,7 +16,9 @@ console.log(firebaseConfig)
 // Instantiate a Firebase app.
 //const firebaseApp = 
 
-firebase.initializeApp(firebaseConfig);
+const fire = firebase.initializeApp(firebaseConfig);
+
+const database = fire.database();
 
 export default class BaseTemplate extends Component {
     constructor(){
@@ -34,6 +36,7 @@ export default class BaseTemplate extends Component {
         },};
 
       this.state = {
+        "products" : [],
         "inShoppingCart" : [],
        "isShoppingCartActive": false,
        user: null,
@@ -42,6 +45,22 @@ export default class BaseTemplate extends Component {
       this.handleToggleCart = this.handleToggleCart.bind(this);
       this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
 
+
+
+      let prods = database.ref('products');
+
+      prods.on('value', data => {
+        let product = [];
+
+        data.forEach(child => {
+          product.push(child.val());
+
+        });
+
+        this.setState({
+            products: product,
+        });
+    });
     }
 
 
@@ -130,12 +149,13 @@ export default class BaseTemplate extends Component {
           log out
         </button>
          <FilterableProductTable 
-          products={this.props.products} 
+          products={this.state.products} 
           isShoppingCartActive = {this.state.isShoppingCartActive}
           inShoppingCart = {this.state.inShoppingCart}
           handleAddToCart = {(p) => this.handleAddToCart(p)}
           handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
           handleToggleCart = {() => this.handleToggleCart()}
+          
         />
       </div>
         }
