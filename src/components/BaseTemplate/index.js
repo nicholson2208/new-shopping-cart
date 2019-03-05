@@ -90,7 +90,7 @@ export default class BaseTemplate extends Component {
 
     makeId() {
       let text = "";
-      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
     
       for (let i = 0; i < 8; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
