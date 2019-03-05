@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![alt text] https://travis-ci.org/nicholson2208/new-shopping-cart.svg?branch=master "Logo Title Text 1")
+![alt text](https://travis-ci.org/nicholson2208/new-shopping-cart.svg?branch=master "Logo Title Text 1")
 
 
 ## Available Scripts
