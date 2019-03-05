@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Media from 'react-media';
 
 import FilterableProductTable from '../FilterableProductTable';
-import Calendar from '../Calendar';
 
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
