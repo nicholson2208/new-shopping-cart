@@ -9,3 +9,6 @@ cache:
 install:
   - yarn install
 script: echo "script"
+deploy:
+  skip_cleanup: true
+  provider: firebase
