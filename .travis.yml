@@ -9,6 +9,7 @@ cache:
 install:
   - yarn install
   - yarn add firebase
+  - yarn add react-firebaseui/StyledFirebaseAuth
 script:
   - yarn build
 deploy:
