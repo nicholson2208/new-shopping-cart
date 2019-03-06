@@ -12,5 +12,4 @@ script: 'true'
 deploy:
   skip_cleanup: true
   provider: firebase
-  project: "shopping-cart"
 
