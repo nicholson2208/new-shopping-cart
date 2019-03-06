@@ -5,7 +5,7 @@ import FilterableProductTable from '../FilterableProductTable';
 
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebaseConfig from '../.././firebase-config.json'
+import firebaseConfig from '../.././firebase-config.json'  // NEED THIS FILE FROM OTHER MACHINE!
 
 // Get the Firebase config from the auto generated file.
 //const firebaseConfig = require('../.././firebase-config.json').result;
