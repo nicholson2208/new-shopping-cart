@@ -14,6 +14,8 @@ console.log(firebaseConfig)
 // Instantiate a Firebase app.
 //const firebaseApp = 
 
+this should break master
+
 const fire = firebase.initializeApp(firebaseConfig);
 
 const database = fire.database();
