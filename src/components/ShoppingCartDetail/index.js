@@ -12,7 +12,7 @@ export default class ShoppingCartDetail extends React.Component {
         let cartItems = [];
         
         itemsInCart.forEach(item => {
-            let aParticularProduct = null;
+            //let aParticularProduct = null;
 
             cartItems.push(
                 <p>{item.name} qty x ${item.price}<div className="removeButton">

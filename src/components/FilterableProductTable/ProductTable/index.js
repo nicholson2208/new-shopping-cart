@@ -5,13 +5,6 @@ import './index.scss';
 
 
 export default class ProductTable extends React.Component {
-  constructor() {
-  super();
-  
-
-  }
-
-
     render() {
 
       const rows = [];    

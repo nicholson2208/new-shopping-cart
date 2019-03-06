@@ -1,5 +1,5 @@
 import React from 'react';
-import {Glyphicon, Button} from 'react-bootstrap';
+//import {Glyphicon, Button} from 'react-bootstrap';
 
 import './index.scss';
 
