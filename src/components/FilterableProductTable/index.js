@@ -3,6 +3,7 @@ import React from 'react';
 import ProductTable from './ProductTable'
 import ShoppingCart from './ShoppingCart'
 import ShoppingCartDetail from '../ShoppingCartDetail';
+import SizeFilter from './SizeFilter';
 
 import './index.scss';
 
@@ -34,9 +35,13 @@ export default class FilterableProductTable extends React.Component {
             handleToggleCart = {() => this.props.handleToggleCart()}
           />
           <div className="ProductTable">
+          <SizeFilter
+            handleToggleFilter = {(s) => this.props.handleToggleFilter(s)}
+          />
           <ProductTable 
             products={this.props.products} 
             inShoppingCart = {this.props.inShoppingCart}
+            sizesDisplaying = {this.props.sizesDisplaying}
             handleAddToCart = {(p, s) => this.props.handleAddToCart(p, s)}
             
           />

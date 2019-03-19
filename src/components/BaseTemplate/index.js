@@ -37,13 +37,17 @@ export default class BaseTemplate extends Component {
         "products" : [],
         "inShoppingCart" : {},
        "isShoppingCartActive": false,
+       "sizesDisplaying" : {
+                            "S" : true,
+                            "M" : true,
+                            "L" : true,
+          },
        user: null,
         };
       this.handleAddToCart = this.handleAddToCart.bind(this);
       this.handleToggleCart = this.handleToggleCart.bind(this);
       this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
-
-
+      this.handleToggleFilter = this.handleToggleFilter.bind(this);
 
       let prods = database.ref('products');
 
@@ -139,6 +143,21 @@ export default class BaseTemplate extends Component {
 
     }
 
+
+    handleToggleFilter(sizePressed) {
+
+      console.log("you pressed the filter", sizePressed);
+      const sizesDiplsaying = this.state.sizesDisplaying;
+
+      const toggle = !this.state.sizesDisplaying[sizePressed];
+
+      sizesDiplsaying[sizePressed] = toggle;
+
+      this.setState({"sizesDisplaying": sizesDiplsaying});
+
+    }
+
+
     render() {
       return (
         <div>
@@ -162,7 +181,8 @@ export default class BaseTemplate extends Component {
               handleAddToCart = {(p, s) => this.handleAddToCart(p, s)}
               handleRemoveFromCart = {(p, s) => this.handleRemoveFromCart(p, s)} 
               handleToggleCart = {() => this.handleToggleCart()}
-              
+              handleToggleFilter = {(s) => this.handleToggleFilter(s)}
+              sizesDisplaying = {this.state.sizesDisplaying}
             />
           </div>
             }
