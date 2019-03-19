@@ -1,5 +1,4 @@
 import React from 'react';
-//import {Glyphicon, Button} from 'react-bootstrap';
 
 import './index.scss';
 
@@ -7,14 +6,18 @@ import './index.scss';
 export default class CheckoutArea extends React.Component {
     render() {
         const cartItems = this.props.inShoppingCart;
+        const products = this.props.products;
 
         let totalPrice = 0;
         let totalItems = 0;
 
-        cartItems.forEach(item => {
-            totalPrice += item.price;
-            totalItems++;
-        });
+        
+        for(let item in cartItems){
+            if(cartItems[item]){
+                totalPrice +=  cartItems[item] *products[item].price;
+                totalItems += cartItems[item];
+            }
+        };
 
         return (
             <div>
