@@ -85,20 +85,20 @@ export default class BaseTemplate extends Component {
       });
     }
   
-    handleRemoveFromCart(product){ // I think the fix here is to make it like a quantity
+    handleRemoveFromCart(key){ // I think the fix here is to make it like a quantity
       // and have different rules for multiple of the same item
       console.log("oh boy, I removed something");
-      console.log(product.id);
-      let newProductList = this.state.inShoppingCart;
+      console.log(key);
 
-      newProductList.forEach((x) =>{
-        console.log(x.id)
-      });
+      let newProductObject = this.state.inShoppingCart;
+
+      if (key in newProductObject && newProductObject[key] > 0){
+        newProductObject[key] -= 1;
+      }
       
-      newProductList = newProductList.filter((item)=> {return(item.id !== product.id)});
-
-      this.setState({"inShoppingCart": newProductList});
+      this.setState({"inShoppingCart": newProductObject});
     }
+    
 
     handleAddToCart(product){      
       console.log(product);

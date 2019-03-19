@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import BaseTemplate from './components/BaseTemplate';
 import * as serviceWorker from './serviceWorker';
-//import database from './static/data/products.json';
 
 
 
