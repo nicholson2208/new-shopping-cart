@@ -155,7 +155,7 @@ export default class BaseTemplate extends Component {
               isShoppingCartActive = {this.state.isShoppingCartActive}
               inShoppingCart = {this.state.inShoppingCart}
               handleAddToCart = {(p, s) => this.handleAddToCart(p, s)}
-              handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
+              handleRemoveFromCart = {(p, s) => this.handleRemoveFromCart(p, s)} 
               handleToggleCart = {() => this.handleToggleCart()}
               
             />

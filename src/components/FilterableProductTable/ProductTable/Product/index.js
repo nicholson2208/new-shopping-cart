@@ -15,7 +15,6 @@ export default class Product extends React.Component {
 
       let size_buttons = [];
       for(let size in product["numberAvailable"]){
-        let this_things_size = size;
         size_buttons.push(
 
           <Button
