@@ -7,14 +7,16 @@ import './index.scss';
 export default class CheckoutArea extends React.Component {
     render() {
         const cartItems = this.props.inShoppingCart;
+        const products = this.props.products;
 
         let totalPrice = 0;
         let totalItems = 0;
 
-        cartItems.forEach(item => {
-            totalPrice += item.price;
+        
+        for(let item in cartItems){
+            totalPrice += products[item].price;
             totalItems++;
-        });
+        };
 
         return (
             <div>

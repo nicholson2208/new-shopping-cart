@@ -14,8 +14,6 @@ console.log(firebaseConfig)
 // Instantiate a Firebase app.
 //const firebaseApp = 
 
-this should break master
-
 const fire = firebase.initializeApp(firebaseConfig);
 
 const database = fire.database();
@@ -37,7 +35,7 @@ export default class BaseTemplate extends Component {
 
       this.state = {
         "products" : [],
-        "inShoppingCart" : [],
+        "inShoppingCart" : {},
        "isShoppingCartActive": false,
        user: null,
         };
@@ -87,17 +85,6 @@ export default class BaseTemplate extends Component {
       });
     }
   
-
-    makeId() {
-      let text = "";
-      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
-    
-      for (let i = 0; i < 8; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
-      return text;
-    }
-
     handleRemoveFromCart(product){ // I think the fix here is to make it like a quantity
       // and have different rules for multiple of the same item
       console.log("oh boy, I removed something");
@@ -114,13 +101,18 @@ export default class BaseTemplate extends Component {
     }
 
     handleAddToCart(product){      
-      product["id"] = this.makeId();
       console.log(product);
 
-      let newProductList = this.state.inShoppingCart;
-      newProductList.push(product);
+      let newProductObject = this.state.inShoppingCart;
+
+      if (product["sku"] in newProductObject){
+        newProductObject[product["sku"]] += 1;
+      } else {
+        newProductObject[product["sku"]] = 1
+      }
+
       
-      this.setState({"inShoppingCart": newProductList});
+      this.setState({"inShoppingCart": newProductObject});
 
     }
 

@@ -8,30 +8,32 @@ import './index.scss';
 export default class ShoppingCartDetail extends React.Component {
     render() {
         const itemsInCart = this.props.inShoppingCart;
+        const products = this.props.products;
 
         let cartItems = [];
         
-        itemsInCart.forEach(item => {
+        for(let key in itemsInCart){
             //let aParticularProduct = null;
 
             cartItems.push(
-                <p>{item.name} qty x ${item.price}<div className="removeButton">
+                <p>{products[key].name} qty {itemsInCart[key]} x ${products[key].price}<div className="removeButton">
                         <Button
                             bsStyle="danger"
                             bsSize="xsmall"
-                            onClick={()=>this.props.handleRemoveFromCart(item)}
+                            //onClick={()=>this.props.handleRemoveFromCart(key)}
                         >
                             <Glyphicon 
                                 glyph="remove"
                             />
                         </Button>
                     </div></p>); // maybe make a plus and minus button to control the quanity in the cart
-        });
+        }
 
       return (
         <div className="ShoppingCartDetail">
             {cartItems}
             <CheckoutArea
+                products = {this.props.products}
                 inShoppingCart = {itemsInCart}
             />
         </div>
