@@ -14,22 +14,22 @@ export default class ShoppingCartDetail extends React.Component {
         
         for(let key in itemsInCart){
             //let aParticularProduct = null;
-
-            if (itemsInCart[key] > 0){
-                cartItems.push( // doing the product thing not as an object was so dumb holy crap
-                    <p>{products[key].name} qty {itemsInCart[key]} x ${products[key].price}<div className="removeButton">
-                            <Button
-                                bsStyle="danger"
-                                bsSize="xsmall"
-                                onClick={()=>this.props.handleRemoveFromCart(key)}
-                            >
-                                <Glyphicon 
-                                    glyph="remove"
-                                />
-                            </Button>
-                        </div></p>); // maybe make a plus and minus button to control the quanity in the cart
+            for(let size in itemsInCart[key]){
+                if (itemsInCart[key][size] > 0){
+                    cartItems.push( // doing the product thing not as an object was so dumb holy crap
+                        <p>{products[key].name} {size} qty {itemsInCart[key][size]} x ${products[key].price}<div className="removeButton">
+                                <Button
+                                    bsStyle="danger"
+                                    bsSize="xsmall"
+                                    onClick={()=>this.props.handleRemoveFromCart(key, size)}
+                                >
+                                    <Glyphicon 
+                                        glyph="remove"
+                                    />
+                                </Button>
+                            </div></p>); // maybe make a plus and minus button to control the quanity in the cart
+                }
             }
-
             
         }
 

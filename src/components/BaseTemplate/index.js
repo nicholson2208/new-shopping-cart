@@ -85,36 +85,46 @@ export default class BaseTemplate extends Component {
       });
     }
   
-    handleRemoveFromCart(key){ // I think the fix here is to make it like a quantity
+    handleRemoveFromCart(key, size){ // I think the fix here is to make it like a quantity
       // and have different rules for multiple of the same item
       console.log("oh boy, I removed something");
       console.log(key);
 
       let newProductObject = this.state.inShoppingCart;
 
-      if (key in newProductObject && newProductObject[key] > 0){
-        newProductObject[key] -= 1;
+      if (key in newProductObject && newProductObject[key][size] > 0){
+        newProductObject[key][size] -= 1;
       }
       
       this.setState({"inShoppingCart": newProductObject});
     }
     
 
-    handleAddToCart(product){      
-      console.log(product);
+    handleAddToCart(product, size){      
+      // console.log(product);
+      // console.log(size);
 
       let newProductObject = this.state.inShoppingCart;
 
       if (product["sku"] in newProductObject){
-        newProductObject[product["sku"]] += 1;
+        if ( size in newProductObject[product["sku"]]){
+          // console.log(size);
+          newProductObject[product["sku"]][size] += 1;
+        } else {
+          newProductObject[product["sku"]][size] = 1;
+
+        }
+
       } else {
-        newProductObject[product["sku"]] = 1
+        newProductObject[product["sku"]] = {};
+        newProductObject[product["sku"]][size] = 1
       }
 
       
       this.setState({"inShoppingCart": newProductObject});
 
     }
+
 
     handleToggleCart() {
       const toggled = !this.state.isShoppingCartActive;
@@ -135,29 +145,29 @@ export default class BaseTemplate extends Component {
               firebaseAuth={firebase.auth()}
             />
         </div>
-    : <div>
-        <button 
-          onClick={() => this.handleLogOut()}>
-          log out
-        </button>
-         <FilterableProductTable 
-          products={this.state.products} 
-          isShoppingCartActive = {this.state.isShoppingCartActive}
-          inShoppingCart = {this.state.inShoppingCart}
-          handleAddToCart = {(p) => this.handleAddToCart(p)}
-          handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
-          handleToggleCart = {() => this.handleToggleCart()}
-          
-        />
-      </div>
-        }
+        : <div>
+            <button 
+              onClick={() => this.handleLogOut()}>
+              log out
+            </button>
+            <FilterableProductTable 
+              products={this.state.products} 
+              isShoppingCartActive = {this.state.isShoppingCartActive}
+              inShoppingCart = {this.state.inShoppingCart}
+              handleAddToCart = {(p, s) => this.handleAddToCart(p, s)}
+              handleRemoveFromCart = {(p) => this.handleRemoveFromCart(p)} 
+              handleToggleCart = {() => this.handleToggleCart()}
+              
+            />
+          </div>
+            }
 
 
-        </div>
-        
-        
-        
-      );
+            </div>
+            
+            
+            
+          );
     }
   }
 
