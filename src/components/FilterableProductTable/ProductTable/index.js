@@ -19,6 +19,15 @@ export default class ProductTable extends React.Component {
           if(this.props.sizesDisplaying[size]){
             addIt = true;
             // console.log("should be displaying", product["sku"], size);
+            if (product["sku"] in this.props.inShoppingCart){
+              if ( size in this.props.inShoppingCart[product["sku"]]){
+                // console.log(size);
+                if (this.props.inShoppingCart[product["sku"]][size] >= product["numberAvailable"][size]){
+    
+                  addIt = false;
+                }
+              }
+            }
           }
         }
 
