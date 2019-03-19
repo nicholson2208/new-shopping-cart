@@ -9,21 +9,34 @@ export default class Product extends React.Component {
 
     render() {
       const product = this.props.product;
+      const inCart = this.props.inShoppingCart;
   
       const image_path = require(`../../../../static/data/products/${product.image}`);
       //const size = product.size;
 
       let size_buttons = [];
       for(let size in product["numberAvailable"]){
-        size_buttons.push(
+        let addIt = true;
+        if (product["sku"] in inCart){
+          if ( size in inCart[product["sku"]]){
+            // console.log(size);
+            if (inCart[product["sku"]][size] >= product["numberAvailable"][size]){
 
-          <Button
-            class="size_button"
-            variant="primary" size="sm"
-            onClick={() => this.props.handleAddToCart(product, size)}
-          >{size}
-          </Button>
-        )
+              addIt = false;
+            }
+          }
+        }
+
+        if (addIt){
+          size_buttons.push(
+            <Button
+              class="size_button"
+              variant="primary" size="sm"
+              onClick={() => this.props.handleAddToCart(product, size)}
+            >{size}
+            </Button>
+          )
+        }
 
       }
   

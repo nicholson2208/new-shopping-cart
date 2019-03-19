@@ -14,7 +14,7 @@ export default class FilterableProductTable extends React.Component {
         if(this.props.isShoppingCartActive) { 
           return(
             <ShoppingCartDetail 
-              inShoppingCart = {inCart}
+              inShoppingCart = {this.props.inShoppingCart}
               isShoppingCartActive = {this.props.isShoppingCartActive}
               products = {this.props.products}
 
@@ -36,6 +36,7 @@ export default class FilterableProductTable extends React.Component {
           <div className="ProductTable">
           <ProductTable 
             products={this.props.products} 
+            inShoppingCart = {this.props.inShoppingCart}
             handleAddToCart = {(p, s) => this.props.handleAddToCart(p, s)}
             
           />

@@ -109,7 +109,12 @@ export default class BaseTemplate extends Component {
       if (product["sku"] in newProductObject){
         if ( size in newProductObject[product["sku"]]){
           // console.log(size);
-          newProductObject[product["sku"]][size] += 1;
+          if (newProductObject[product["sku"]][size] < product["numberAvailable"][size]){
+            newProductObject[product["sku"]][size] += 1;
+          } else {
+            console.log("no more of this size")
+
+          }
         } else {
           newProductObject[product["sku"]][size] = 1;
 

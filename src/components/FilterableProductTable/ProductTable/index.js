@@ -12,6 +12,7 @@ export default class ProductTable extends React.Component {
         rows.push(
           <Product
             product={product}
+            inShoppingCart = {this.props.inShoppingCart}
             handleAddToCart = {(p, s) => this.props.handleAddToCart(p, s)}
             key={product.name} />
         );
