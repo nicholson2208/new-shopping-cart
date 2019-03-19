@@ -15,7 +15,7 @@ export default class ShoppingCart extends React.Component {
     }
       
       return (
-        <div class="cart">
+        <div className="cart">
                   <Button
                     block
                     bsStyle="default"
