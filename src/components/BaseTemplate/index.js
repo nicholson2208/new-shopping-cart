@@ -190,7 +190,7 @@ export default class BaseTemplate extends Component {
 
             </div>
             
-            
+             
             
           );
     }
